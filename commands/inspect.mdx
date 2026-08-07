@@ -1,0 +1,32 @@
+---
+title: "bazable inspect"
+sidebarTitle: "inspect"
+description: "Validate code against the contract"
+---
+
+Validates your code against the contract. Detects dead URLs, payload type mismatches, and over‑fetching.
+
+## Usage
+
+```bash
+bazable inspect [options]
+```
+
+## Options
+
+- `-f, --fix` : Auto‑correct simple type mismatches in source files
+- All extraction options (presets, patterns, extensions, etc.)
+
+## Examples
+
+Check for violations:
+
+```bash
+bazable inspect
+```
+
+Auto‑fix payload mismatches:
+
+```bash
+bazable inspect -f
+```

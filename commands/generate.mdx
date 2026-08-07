@@ -1,0 +1,29 @@
+---
+title: "bazable generate"
+sidebarTitle: "generate"
+description: "Generate backend code from the contract"
+---
+
+Generates backend code from the contract.
+
+## Subcommands
+
+- `backend` : Express.js or Hono router stubs with validation
+
+## Usage
+
+```bash
+bazable gen backend [options]
+```
+
+## Options
+
+- `-f, --framework <name>` : express or hono
+- `-o, --output <dir>` : Output directory
+- `-v, --no-validation` : Skip Zod validation schemas
+
+## Example
+
+```bash
+bazable gen backend -f express -o ./api
+```

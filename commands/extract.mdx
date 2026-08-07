@@ -1,0 +1,42 @@
+---
+title: "bazable extract"
+sidebarTitle: "extract"
+description: "Scan code and extract API endpoints"
+---
+
+Scans your codebase for API calls and adds any undocumented endpoints to the contract.
+
+## Usage
+
+```bash
+bazable extract [options]
+```
+
+## Options
+
+- `-r, --payloads` : Also infer request payload schemas
+- `-s, --preset <name>` : Use a pre‑configured pattern (py, php, go, rb, js, ax)
+- `--pattern <regex>` : Custom regex for URL extraction
+- `--ext <extensions...>` : File extensions to scan (e.g. `.py .rb`)
+- `--ignore <patterns...>` : Glob patterns to ignore (e.g. `venv dist`)
+- `--wrapper <names...>` : Custom API wrapper function names
+
+## Examples
+
+Standard extraction with payload inference:
+
+```bash
+bazable extract -r
+```
+
+Python project:
+
+```bash
+bazable extract -s py
+```
+
+Custom regex:
+
+```bash
+bazable extract --pattern 'requests\.get\("([^"]+)"' --ext .py
+```

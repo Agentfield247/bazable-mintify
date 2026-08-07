@@ -1,0 +1,42 @@
+---
+title: "Frontend Developer Cheat Sheet"
+sidebarTitle: "Frontend"
+description: "Common Bazable workflows for frontend developers"
+---
+
+## First-time Setup
+
+```bash
+npm install -g bazable-api
+cd your-frontend
+bazable init
+bazable extract --payloads          # discover all APIs + request schemas
+bazable inspect                     # check for violations
+bazable test --mock --all           # mock-test every endpoint
+bazable hook                        # block broken contracts before push
+```
+
+## Daily Workflow
+
+```bash
+bazable sync                        # get latest contract from backend
+bazable inspect                     # validate code against contract
+bazable test --all --token <token>  # test against real API
+```
+
+## When the backend changes
+
+```bash
+bazable sync                        # pull updated contract
+bazable inspect --fix               # auto‑fix type mismatches in your code
+bazable serve                       # start mock server with new contract
+```
+
+## Handy Options
+
+```bash
+bazable extract -r                  # short for --payloads
+bazable inspect -f                  # short for --fix
+bazable test -a -k                  # mock‑test all endpoints
+bazable ui                          # visual dashboard
+```

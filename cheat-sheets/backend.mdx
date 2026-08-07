@@ -1,0 +1,39 @@
+---
+title: "Backend Developer Cheat Sheet"
+sidebarTitle: "Backend"
+description: "Common Bazable workflows for backend developers"
+---
+
+## First-time Setup
+
+```bash
+npm install -g bazable-api
+cd your-backend
+bazable init
+bazable extract --payloads                       # discover APIs from your own code
+bazable push                                     # upload contract to cloud (creates project)
+```
+
+## Daily Workflow
+
+```bash
+bazable diff https://api.example.com/v1/users    # check if live API matches contract
+bazable test --all --token <token> --method POST # test all endpoints
+bazable push                                     # update contract after changes
+```
+
+## When the frontend expects changes
+
+```bash
+bazable sync                                     # pull latest contract from cloud
+bazable generate backend --framework express     # generate route stubs from contract
+```
+
+## Handy Options
+
+```bash
+bazable serve                                    # spin up mock server for testing
+bazable ui                                       # view contract visually
+bazable import openapi.yaml                      # import existing spec
+bazable inspect                                  # validate backend code too
+```
