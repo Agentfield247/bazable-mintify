@@ -107,5 +107,25 @@
       "github": "https://github.com/mintlify",
       "linkedin": "https://linkedin.com/company/mintlify"
     }
+  },
+  "fonts": {
+    "family": "Inter"
+  },
+  "description": "Bazable is a Git-native API contract management CLI. Scan your codebase, generate an API contract automatically, detect breaking changes, mock endpoints, and sync contracts across frontend and backend teams.",
+  "seo": {
+    "metatags": {
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      "author": "Bazable",
+      "keywords": "bazable, API contract, API management, CLI, git-native, OpenAPI, mock server, contract testing, TypeScript generator, developer tools, API extraction, contract enforcement",
+      "theme-color": "#FF5A1F",
+      "og:type": "website",
+      "og:site_name": "Bazable",
+      "og:locale": "en_US",
+      "twitter:card": "summary_large_image",
+      "twitter:site": "@bazable",
+      "twitter:creator": "@bazable"
+    },
+    "indexing": "all"
   }
 }
