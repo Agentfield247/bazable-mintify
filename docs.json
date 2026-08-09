@@ -58,7 +58,8 @@
           "commands/accept",
           "commands/ci",
           "commands/generate-ui",
-          "commands/mcp"
+          "commands/mcp",
+          "commands/generate-context"
         ]
       }
     ],

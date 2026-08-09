@@ -5,20 +5,30 @@ description: "Generate a React + Tailwind form component from an endpoint's requ
 keywords: ["bazable gen ui", "React form generator", "Tailwind form", "UI generation", "schema to form"]
 ---
 
-Generates a React \+ Tailwind form component from an endpoint’s request schema.
+Generates a form component from an endpoint's request schema. By default, produces a **zero‑dependency, standalone HTML file** with embedded CSS and JavaScript. You can also use `--ai` to let an LLM generate the UI for any framework.
 
 ## Usage
 
 ```bash
-bazable gen ui <method> <url>
+bazable gen ui <method> <url> [options]
 ```
 
 ## Options
 
 - `-o, --output <dir>` : Output directory (default `./generated-ui`)
+- `--ai` : Use an LLM to generate the UI
+- `--framework <name>` : Target framework when using `--ai` (for example, `react-tailwind`)
 
-## Example
+## Examples
+
+Standalone HTML form (default):
 
 ```bash
 bazable gen ui POST https://api.example.com/v1/settlements -o ./my-forms
+```
+
+Generate a React \+ Tailwind form using AI:
+
+```bash
+bazable gen ui POST https://api.example.com/v1/settlements --ai --framework react-tailwind
 ```
