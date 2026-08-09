@@ -50,10 +50,15 @@
       },
       "contact",
       {
-        "group": "Getting Started",
+        "group": "AI & CI",
+        "icon": "sparkles",
         "pages": [
-          "index",
-          "quickstart"
+          "commands/explain",
+          "commands/propose",
+          "commands/accept",
+          "commands/ci",
+          "commands/generate-ui",
+          "commands/mcp"
         ]
       }
     ],
