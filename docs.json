@@ -30,7 +30,16 @@
           "commands/ui",
           "commands/hook",
           "commands/generate",
-          "commands/serve"
+          "commands/serve",
+          "commands/add",
+          "commands/import",
+          "commands/diff",
+          "commands/client",
+          "commands/config",
+          "commands/curl",
+          "commands/docs",
+          "commands/errors",
+          "commands/export"
         ]
       },
       {

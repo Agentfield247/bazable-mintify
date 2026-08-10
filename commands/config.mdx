@@ -1,0 +1,62 @@
+---
+title: "bazable config"
+sidebarTitle: "config"
+description: "View or update the Bazable contract configuration."
+keywords: ["bazable config", "contract config", "AI key", "webhook", "project settings"]
+---
+
+Views or updates the Bazable contract configuration.
+
+## Usage
+
+```bash
+bazable config [options]
+```
+
+## Options
+
+<ParamField query="--get" type="string">
+  Print a specific config value. One of `projectName`, `baseUrl`, `version`, `endpoints`, `pending_proposals`.
+</ParamField>
+
+<ParamField query="--set-project-name" type="string">
+  Set the project name.
+</ParamField>
+
+<ParamField query="--set-base-url" type="string">
+  Set the base URL for the API.
+</ParamField>
+
+<ParamField query="--set-webhook" type="string">
+  Set a Slack or Discord webhook URL for push notifications.
+</ParamField>
+
+<ParamField query="--set-ai-key" type="string">
+  Set your AI API key.
+</ParamField>
+
+<ParamField query="--set-ai-base" type="string">
+  Set a custom AI API base URL (for non-OpenAI providers).
+</ParamField>
+
+<ParamField query="--set-ai-model" type="string">
+  Set the AI model name.
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+
+```bash Print all config
+bazable config
+```
+
+```bash Get a value
+bazable config --get baseUrl
+```
+
+```bash Set project name
+bazable config --set-project-name "my-frontend"
+```
+
+</CodeGroup>

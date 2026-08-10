@@ -18,6 +18,22 @@ bazable ui [options]
   Port for the dashboard server.
 </ParamField>
 
+## What it provides
+
+- **Endpoints table** — every endpoint in your contract, with HTTP method badges, status indicators, and quick-action buttons (Send, Edit, Explain, Propose, Copy Cmd).
+- **Stats cards** — at-a-glance counts of endpoints that are working, failed, or unverified.
+- **API tester** — a built-in, Postman-style tool to send raw HTTP requests with custom headers and body. The dashboard's server-side proxy bypasses CORS restrictions.
+- **Edit, add, delete endpoints** — modify schemas directly from the browser without touching the JSON file.
+- **AI Explain & Propose** — get an AI-generated plain-English explanation of an endpoint, or submit a natural-language schema change request.
+- **Settings** — update the base URL, configure your AI key (with a test-connection button), and manage your webhook URL.
+- **Login modal** — save API credentials so the dashboard can auto-authenticate subsequent requests.
+- **Dark/light mode toggle** — persists across sessions.
+- **Refresh button** — reload the latest contract data without restarting the server.
+
+## Prerequisites
+
+Your project must contain a valid `bazable.config.json` with at least one endpoint.
+
 ## Example
 
 ```bash

@@ -19,12 +19,35 @@ bazable accept <proposalId>
   This command takes no options.
 </Info>
 
+## Prerequisites
+
+- At least one pending proposal must exist in the contract. Proposals are created with [`bazable propose`](/commands/propose).
+- The proposal ID is shown when the proposal is created, or you can list pending proposals with `bazable config --get pending_proposals`.
+
+## What it does
+
+<Steps>
+  <Step title="Locate the proposal">
+    Finds the proposal with the given ID in the `pending_proposals` array of your `bazable.config.json`.
+  </Step>
+  <Step title="Merge the changes">
+    Merges the proposed request and response schema changes into the corresponding endpoint.
+  </Step>
+  <Step title="Mark as accepted">
+    Marks the proposal as accepted with a timestamp so it is not applied again.
+  </Step>
+</Steps>
+
+<Tip>
+  After acceptance, push the updated contract with [`bazable push`](/commands/push) so the whole team stays in sync.
+</Tip>
+
 ## Example
 
 ```bash
-bazable accept 1691501234567
-```
+bazable propose "Add a phone_number field to the POST /v1/users endpoint"
+# Proposal ID: 1691501234567
 
-<Tip>
-  Get the `proposalId` from the output of [`bazable propose`](/commands/propose).
-</Tip>
+bazable accept 1691501234567
+# Proposal accepted and applied. Updated endpoint: POST https://api.example.com/v1/users
+```

@@ -1,0 +1,46 @@
+---
+title: "bazable add"
+sidebarTitle: "add"
+description: "Fetch a live API endpoint and store its response schema in the contract."
+keywords: ["bazable add", "add endpoint", "fetch endpoint schema", "manual endpoint"]
+---
+
+Fetches a live API endpoint and stores its response schema in the contract.
+
+## Usage
+
+```bash
+bazable add <url> [options]
+```
+
+## Options
+
+<ParamField query="-m, --method" default="GET" type="string">
+  HTTP method to use when fetching the endpoint.
+</ParamField>
+
+<ParamField query="-t, --token" type="string">
+  Access token for authenticated endpoints.
+</ParamField>
+
+<ParamField query="-H, --header" type="string[]">
+  Additional headers in `key:value` format.
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+
+```bash Simple GET
+bazable add https://jsonplaceholder.typicode.com/posts/1
+```
+
+```bash Authenticated POST
+bazable add https://api.example.com/v1/users --method POST --token "your-token"
+```
+
+</CodeGroup>
+
+<Tip>
+  Use [`bazable extract`](/commands/extract) to auto-discover endpoints from source code instead of adding them one by one.
+</Tip>

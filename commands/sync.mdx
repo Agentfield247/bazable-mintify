@@ -18,12 +18,50 @@ bazable sync
 
 ## Options
 
-<Info>
-  This command takes no options.
-</Info>
+<ParamField query="--version" type="number">
+  Fetch a specific contract version instead of the latest.
+</ParamField>
 
-## Example
+<ParamField query="-t, --token" type="string">
+  Use a specific access token (headless mode, no browser authentication). Useful in CI.
+</ParamField>
 
-```bash
+## Prerequisites
+
+- Your `bazable.config.json` must contain a `cloudProjectId` (set automatically by the first [`bazable push`](/commands/push)).
+- You must be authenticated. If you are not logged in, the command starts the [device-code flow](/cloud/device-auth) automatically. In CI, use `--token` to authenticate headlessly.
+
+## What it does
+
+<Steps>
+  <Step title="Check authentication">
+    If no stored token exists (and no `--token` is provided), starts the device-code flow.
+  </Step>
+  <Step title="Fetch the contract">
+    Retrieves the contract data from the cloud. Gets the latest version by default, or the specified `--version`.
+  </Step>
+  <Step title="Overwrite the local contract">
+    Your local `bazable.config.json` is replaced with the fetched version. All endpoints, schemas, base URLs, and the `projectName` are updated.
+  </Step>
+  <Step title="Handle missing versions">
+    If the requested version does not exist, a clear error is shown.
+  </Step>
+</Steps>
+
+## Examples
+
+<CodeGroup>
+
+```bash Latest version
 bazable sync
 ```
+
+```bash Rollback
+bazable sync --version 1
+```
+
+```bash CI (headless)
+bazable sync --token $BAZABLE_TOKEN
+```
+
+</CodeGroup>

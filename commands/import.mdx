@@ -1,0 +1,50 @@
+---
+title: "bazable import"
+sidebarTitle: "import"
+description: "Import OpenAPI, Postman, or CSV specifications and merge endpoints into your contract."
+keywords: ["bazable import", "OpenAPI import", "Postman import", "CSV import", "merge endpoints"]
+---
+
+Imports API specifications (OpenAPI v2/v3, Postman collections, CSV) and merges endpoints into the contract.
+
+<Note>
+  Aliases: `imp`.
+</Note>
+
+## Usage
+
+```bash
+bazable import [source] [options]
+```
+
+## Options
+
+<ParamField query="-b, --base-url" type="string">
+  Base URL to resolve relative paths.
+</ParamField>
+
+<ParamField query="--csv" type="string">
+  Import from a CSV file at the given path.
+</ParamField>
+
+<ParamField query="--name" type="string">
+  Endpoint name when importing from CSV.
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+
+```bash OpenAPI file
+bazable import openapi.yaml
+```
+
+```bash Remote Swagger
+bazable import https://api.example.com/swagger.json
+```
+
+```bash CSV
+bazable import --csv products.csv --name products
+```
+
+</CodeGroup>

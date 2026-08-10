@@ -15,15 +15,51 @@ bazable ci
 
 ## Options
 
-<Info>
-  This command takes no options.
-</Info>
+<ParamField query="-t, --token" type="boolean">
+  Include a `BAZABLE_TOKEN` secret reference in the workflow. The generated YAML passes `--token ${{ secrets.BAZABLE_TOKEN }}` to `bazable inspect`, enabling headless authentication in CI.
+</ParamField>
 
-## Example
+## What it generates
 
-```bash
+The workflow file (`bazable.yml`) contains the following steps:
+
+<Steps>
+  <Step title="Checkout code">
+    Pulls your repository into the runner.
+  </Step>
+  <Step title="Setup Node.js">
+    Ensures Node.js 20 is available.
+  </Step>
+  <Step title="Install Bazable">
+    Installs `bazable-api` globally.
+  </Step>
+  <Step title="Run contract inspection">
+    Executes `bazable inspect --ci` (or with `--token` if the `--token` flag was used).
+  </Step>
+</Steps>
+
+<Note>
+  If `bazable inspect` exits with a non-zero code, the pull request is blocked.
+</Note>
+
+## Prerequisites
+
+- Your project must contain a valid `bazable.config.json`.
+- If you use `--token`, add your Bazable access token as a repository secret named `BAZABLE_TOKEN` (Settings → Secrets and variables → Actions → New repository secret).
+
+## Examples
+
+<CodeGroup>
+
+```bash Standard
 bazable ci
 ```
+
+```bash With token
+bazable ci --token
+```
+
+</CodeGroup>
 
 <Note>
   The generated workflow assumes your default branch is `main`. Rename the target branch in `.github/workflows/bazable.yml` if you use a different one.

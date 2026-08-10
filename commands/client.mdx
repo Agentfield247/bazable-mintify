@@ -1,0 +1,34 @@
+---
+title: "bazable client"
+sidebarTitle: "client"
+description: "Generate a strictly-typed TypeScript API client from your contract."
+keywords: ["bazable client", "typed API client", "TypeScript client", "bazableClient"]
+---
+
+Generates a strictly-typed API client (`bazableClient.ts`) with async functions for each contracted endpoint.
+
+## Usage
+
+```bash
+bazable client [options]
+```
+
+## Options
+
+<ParamField query="-o, --output" default="cwd" type="string">
+  Output directory.
+</ParamField>
+
+<ParamField query="--stdout" type="boolean">
+  Print to the terminal instead of writing a file.
+</ParamField>
+
+<ParamField query="--prefix" type="string">
+  Prefix for generated function names.
+</ParamField>
+
+## Example
+
+```bash
+bazable client -o ./src/api
+```

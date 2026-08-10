@@ -45,6 +45,17 @@ bazable sync                                     # pull latest contract from clo
 bazable generate backend --framework express     # generate route stubs from contract
 ```
 
+## AI & CI
+
+```bash
+bazable ci                                                    # generate GitHub Actions workflow
+bazable gen ui POST https://api.example.com/v1/settlements    # generate a React form
+bazable explain POST https://api.example.com/v1/users         # AI endpoint explanation
+bazable propose "Add phone field"                             # AI contract change proposal
+bazable accept 1691501234567                                  # approve proposal
+bazable mcp                                                   # start MCP server for AI agents
+```
+
 ## Handy options
 
 | Command | Purpose |

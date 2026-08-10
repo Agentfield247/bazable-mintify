@@ -1,0 +1,38 @@
+---
+title: "bazable errors"
+sidebarTitle: "errors"
+description: "View or clear the persistent Bazable error log."
+keywords: ["bazable errors", "error log", "troubleshooting", "clear log"]
+---
+
+Views or clears the persistent error log at `~/.bazable/errors.log`.
+
+## Usage
+
+```bash
+bazable errors [options]
+```
+
+## Options
+
+<ParamField query="-c, --clear" type="boolean">
+  Clear the error log.
+</ParamField>
+
+<ParamField query="-n, --lines" default={20} type="number">
+  Number of recent errors to show.
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+
+```bash Show recent errors
+bazable errors
+```
+
+```bash Clear the log
+bazable errors -c
+```
+
+</CodeGroup>

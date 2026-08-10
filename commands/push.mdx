@@ -18,6 +18,35 @@ bazable push
   This command takes no options.
 </Info>
 
+## Prerequisites
+
+- Your project must be initialized ([`bazable init`](/commands/init)) and contain a valid `bazable.config.json` with at least one endpoint.
+- You must be authenticated. If you are not logged in, the command starts the device-code flow automatically. Open the printed link, sign in with GitHub or email, and the push continues.
+
+## What it does
+
+<Steps>
+  <Step title="Check authentication">
+    If no stored token exists, starts the [device-code flow](/cloud/device-auth).
+  </Step>
+  <Step title="Create a cloud project">
+    On the very first push, a unique project ID (`bz_proj_…`) is generated and saved to your `bazable.config.json` as `cloudProjectId`. The cloud API base URL is saved automatically too.
+  </Step>
+  <Step title="Upload the contract">
+    Your entire contract (endpoints, schemas, base URLs) is sent to the cloud and stored as a new version.
+  </Step>
+  <Step title="Increment the version">
+    Each push increments the version number. Roll back to a specific version with [`bazable sync --version <number>`](/commands/sync).
+  </Step>
+  <Step title="Notify via webhook">
+    If you have set a webhook URL (`bazable config --set-webhook`), a notification is sent to your Slack or Discord channel.
+  </Step>
+</Steps>
+
+<Tip>
+  After the first push, teammates can clone the repo and run [`bazable sync`](/commands/sync) to pull the latest contract with no extra configuration.
+</Tip>
+
 ## Example
 
 ```bash

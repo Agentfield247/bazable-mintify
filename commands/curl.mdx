@@ -1,0 +1,46 @@
+---
+title: "bazable curl"
+sidebarTitle: "curl"
+description: "Send raw HTTP requests from the terminal with built-in logging and no CORS restrictions."
+keywords: ["bazable curl", "curl replacement", "HTTP request CLI", "API request"]
+---
+
+Sends a raw HTTP request from the terminal. Works exactly like `curl`, but with built-in logging, error handling, and no CORS restrictions.
+
+## Usage
+
+```bash
+bazable curl <url> [options]
+```
+
+## Options
+
+<ParamField query="-X, --method" default="GET" type="string">
+  HTTP method to use.
+</ParamField>
+
+<ParamField query="-H, --header" type="string[]">
+  Request headers in `key:value` format.
+</ParamField>
+
+<ParamField query="-d, --data" type="string">
+  Request body (JSON string or plain text).
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+
+```bash Simple GET
+bazable curl https://jsonplaceholder.typicode.com/posts/1
+```
+
+```bash POST with body
+bazable curl https://api.example.com/v1/users \
+  -X POST \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Alice","email":"alice@example.com"}'
+```
+
+</CodeGroup>

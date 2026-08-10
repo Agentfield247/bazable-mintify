@@ -1,0 +1,30 @@
+---
+title: "bazable export"
+sidebarTitle: "export"
+description: "Export the Bazable contract as an OpenAPI 3.0 specification."
+keywords: ["bazable export", "OpenAPI export", "contract to OpenAPI", "API spec"]
+---
+
+Exports the contract as an OpenAPI 3.0 specification.
+
+## Usage
+
+```bash
+bazable export [options]
+```
+
+## Options
+
+<ParamField query="-o, --output" default="./openapi.json" type="string">
+  Output file path.
+</ParamField>
+
+## Example
+
+```bash
+bazable export -o ./api-spec.json
+```
+
+<Tip>
+  Pair with [`bazable import`](/commands/import) to round-trip contracts to and from OpenAPI.
+</Tip>

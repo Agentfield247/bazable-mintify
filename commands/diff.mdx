@@ -1,0 +1,62 @@
+---
+title: "bazable diff"
+sidebarTitle: "diff"
+description: "Compare the stored contract schema against the live API and highlight breaking changes."
+keywords: ["bazable diff", "contract diff", "breaking changes", "live API compare"]
+---
+
+Compares the stored contract schema against the live API and highlights breaking changes.
+
+## Usage
+
+```bash
+bazable diff [url] [options]
+```
+
+## Options
+
+<ParamField query="-t, --token" type="string">
+  Access token for authenticated endpoints.
+</ParamField>
+
+<ParamField query="-m, --method" default="GET" type="string">
+  HTTP method to use.
+</ParamField>
+
+<ParamField query="--base-url" type="string">
+  Override the base URL.
+</ParamField>
+
+<ParamField query="--base-path" type="string">
+  Explicit path to append to the base URL.
+</ParamField>
+
+<ParamField query="--breaking-only" type="boolean">
+  Show only breaking changes.
+</ParamField>
+
+<ParamField query="--json" type="boolean">
+  Output the diff as JSON.
+</ParamField>
+
+<ParamField query="--accept" type="boolean">
+  Automatically update the contract to match the live API.
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+
+```bash Diff all endpoints
+bazable diff
+```
+
+```bash Diff single endpoint as JSON
+bazable diff https://api.example.com/v1/users --json
+```
+
+```bash Auto-accept live changes
+bazable diff --accept
+```
+
+</CodeGroup>
