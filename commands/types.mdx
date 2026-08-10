@@ -5,7 +5,7 @@ description: "Generate TypeScript type definitions from your Bazable contract."
 keywords: ["bazable types", "TypeScript types", "type definitions", "bazable-types", "contract types"]
 ---
 
-Generates TypeScript type definitions (`bazable-types.ts`) for every request and response schema in your contract. Use them directly in your frontend or backend for compile-time safety.
+Generates TypeScript interfaces from the stored response schemas in your contract.
 
 ## Usage
 
@@ -16,11 +16,19 @@ bazable types [options]
 ## Options
 
 <ParamField query="-o, --output" default="cwd" type="string">
-  Output directory for the generated types file.
+  Output directory.
 </ParamField>
 
 <ParamField query="--stdout" type="boolean">
   Print to the terminal instead of writing a file.
+</ParamField>
+
+<ParamField query="--prefix" type="string">
+  Prefix for generated interface names.
+</ParamField>
+
+<ParamField query="--name" type="string">
+  Override the interface name (only for a single schema).
 </ParamField>
 
 ## Example
@@ -30,5 +38,5 @@ bazable types -o ./src/types
 ```
 
 <Tip>
-  Pair with [`bazable client`](/commands/client) to get typed request functions alongside typed request and response models.
+  Pair with [`bazable client`](/commands/client) to get typed request functions alongside typed response models.
 </Tip>
