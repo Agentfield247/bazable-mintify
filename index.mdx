@@ -1,0 +1,51 @@
+---
+title: "Introduction"
+sidebarTitle: "Introduction"
+description: "Bazable is a contract-first toolkit that keeps your frontend, backend, and AI agents in sync."
+---
+
+Bazable turns your API into a versioned contract. Extract endpoints from existing code, validate implementations against the contract, generate backend stubs and UI components, and let AI agents propose safe schema changes.
+
+## Why Bazable
+
+- **One source of truth.** A single `bazable.config.json` describes every endpoint, request, and response your app uses.
+- **Catch drift early.** `bazable inspect` flags dead URLs, payload mismatches, and over-fetching before they hit production.
+- **Ship faster.** Generate Express or Hono route stubs, React \+ Tailwind forms, and mock servers straight from the contract.
+- **AI-native.** Propose schema changes in plain English, or expose the contract to coding agents through the built-in MCP server.
+
+## How it works
+
+<Steps>
+  <Step title="Initialize">
+    Run [`bazable init`](/commands/init) in your project to create a `bazable.config.json`.
+  </Step>
+  <Step title="Extract">
+    Run [`bazable extract`](/commands/extract) to scan your code and populate the contract with real endpoints.
+  </Step>
+  <Step title="Enforce">
+    Run [`bazable inspect`](/commands/inspect) locally, in a [pre-push hook](/commands/hook), or in [CI](/commands/ci) to keep code and contract aligned.
+  </Step>
+  <Step title="Generate">
+    Use [`bazable generate`](/commands/generate), [`bazable gen ui`](/commands/generate-ui), and [`bazable serve`](/commands/serve) to scaffold code, forms, and mocks.
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Install the CLI and set up your first contract in under five minutes.
+  </Card>
+
+  <Card title="Commands" icon="terminal" href="/commands/init">
+    Full reference for every `bazable` command.
+  </Card>
+
+  <Card title="Frontend cheat sheet" icon="browser" href="/cheat-sheets/frontend">
+    Common workflows for frontend developers.
+  </Card>
+
+  <Card title="Backend cheat sheet" icon="server" href="/cheat-sheets/backend">
+    Common workflows for backend developers.
+  </Card>
+</CardGroup>

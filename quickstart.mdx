@@ -1,0 +1,102 @@
+---
+title: "Quickstart"
+sidebarTitle: "Quickstart"
+description: "Install Bazable and generate your first contract in under five minutes."
+---
+
+## 1. Install the CLI
+
+<CodeGroup>
+
+```bash npm
+npm install -g bazable
+```
+
+```bash pnpm
+pnpm add -g bazable
+```
+
+```bash yarn
+yarn global add bazable
+```
+
+</CodeGroup>
+
+Verify the install:
+
+```bash
+bazable --version
+```
+
+## 2. Initialize a project
+
+From the root of your app, create a `bazable.config.json`:
+
+```bash
+bazable init
+```
+
+This reads your `package.json` for the project name and seeds an empty endpoints list. See [`bazable init`](/commands/init) for details.
+
+## 3. Extract endpoints from your code
+
+Scan the codebase to auto-populate the contract with real endpoints and payload schemas:
+
+```bash
+bazable extract -r
+```
+
+Use a preset for non-JS stacks:
+
+```bash
+bazable extract -s py    # Python
+bazable extract -s go    # Go
+bazable extract -s rb    # Ruby
+```
+
+Full options in [`bazable extract`](/commands/extract).
+
+## 4. Validate code against the contract
+
+```bash
+bazable inspect
+```
+
+`inspect` flags dead URLs, payload mismatches, and over-fetching. Run it locally, in a [pre-push hook](/commands/hook), or in [CI](/commands/ci).
+
+## 5. Generate code and mocks
+
+<CardGroup cols={2}>
+  <Card title="Backend stubs" icon="server" href="/commands/generate">
+    Generate Express or Hono routes with Zod validation from your contract.
+  </Card>
+
+  <Card title="UI forms" icon="browser" href="/commands/generate-ui">
+    Generate React \+ Tailwind form components from request schemas.
+  </Card>
+
+  <Card title="Mock server" icon="cloud" href="/commands/serve">
+    Spin up a mock API with realistic data generation.
+  </Card>
+
+  <Card title="Local dashboard" icon="chart-bar" href="/commands/ui">
+    Browse endpoints, schemas, and test your API in the browser.
+  </Card>
+</CardGroup>
+
+## 6. Sync with your team
+
+Push the contract to Bazable Cloud so teammates can pull it:
+
+```bash
+bazable push
+bazable sync
+```
+
+Authenticate the CLI with [device code login](/cloud/device-auth).
+
+## What's next
+
+- Explore the full [command reference](/commands/init).
+- Try the [frontend](/cheat-sheets/frontend) and [backend](/cheat-sheets/backend) cheat sheets.
+- Let AI agents propose schema changes with [`bazable propose`](/commands/propose) or hook them into your IDE with [`bazable mcp`](/commands/mcp).
