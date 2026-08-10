@@ -1,0 +1,42 @@
+---
+title: "bazable watch"
+sidebarTitle: "watch"
+description: "Continuously poll a remote contract and auto-fix your code on changes."
+keywords: ["bazable watch", "contract polling", "auto-fix", "live contract sync"]
+---
+
+Continuously polls a remote contract (or cloud project) and auto-fixes your code on changes.
+
+## Usage
+
+```bash
+bazable watch [url] [options]
+```
+
+## Options
+
+<ParamField query="-i, --interval" default={60} type="number">
+  Polling interval in seconds.
+</ParamField>
+
+<ParamField query="--dry-run" type="boolean">
+  Show changes without applying them.
+</ParamField>
+
+<ParamField query="--auto-accept" type="boolean">
+  Automatically apply all changes.
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+
+```bash Watch a remote contract
+bazable watch https://api.example.com/contract.json
+```
+
+```bash Watch the linked cloud project
+bazable watch
+```
+
+</CodeGroup>

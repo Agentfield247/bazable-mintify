@@ -47,7 +47,8 @@
         "group": "Cloud Sync",
         "icon": "cloud",
         "pages": [
-          "cloud/device-auth"
+          "cloud/device-auth",
+          "cloud/watch"
         ]
       },
       {
