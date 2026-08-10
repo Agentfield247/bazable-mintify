@@ -1,0 +1,59 @@
+---
+title: "bazable login / logout"
+sidebarTitle: "Login & Logout"
+description: "Store or remove API credentials and cloud authentication tokens."
+keywords: ["bazable login", "bazable logout", "cloud auth", "credentials", "Supabase"]
+---
+
+Stores or removes API credentials and cloud authentication tokens.
+
+## Usage
+
+```bash
+bazable login [options]
+bazable logout
+```
+
+## Options (login)
+
+<ParamField query="-e, --email" type="string">
+  Your login email.
+</ParamField>
+
+<ParamField query="-p, --password" type="string">
+  Your login password.
+</ParamField>
+
+<ParamField query="-t, --token" type="string">
+  A pre-obtained access token.
+</ParamField>
+
+<ParamField query="-b, --base-url" type="string">
+  Base URL of the API.
+</ParamField>
+
+<ParamField query="--supabase-url" type="string">
+  Supabase project URL.
+</ParamField>
+
+<ParamField query="--supabase-key" type="string">
+  Supabase anon key.
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+
+```bash Email + password
+bazable login -e admin@example.com -p secret123
+```
+
+```bash Logout
+bazable logout
+```
+
+</CodeGroup>
+
+<Tip>
+  For passwordless login, see [Device Code Authentication](/cloud/device-auth).
+</Tip>

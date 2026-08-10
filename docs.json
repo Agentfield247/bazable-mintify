@@ -40,7 +40,9 @@
           "commands/docs",
           "commands/errors",
           "commands/export",
-          "commands/generate-db"
+          "commands/generate-db",
+          "commands/types",
+          "commands/lsp"
         ]
       },
       {
@@ -48,7 +50,8 @@
         "icon": "cloud",
         "pages": [
           "cloud/device-auth",
-          "cloud/watch"
+          "cloud/watch",
+          "cloud/login"
         ]
       },
       {

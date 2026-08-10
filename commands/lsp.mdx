@@ -1,0 +1,41 @@
+---
+title: "bazable lsp"
+sidebarTitle: "lsp"
+description: "Start a Language Server Protocol server that surfaces contract violations directly in your editor."
+keywords: ["bazable lsp", "language server", "LSP", "editor integration", "contract diagnostics"]
+---
+
+Starts a Language Server Protocol (LSP) server that surfaces Bazable contract violations directly in your editor as you type. Works with any LSP-compatible editor (VS Code, Neovim, Zed, and more).
+
+## Usage
+
+```bash
+bazable lsp
+```
+
+## Options
+
+<Info>
+  This command takes no options.
+</Info>
+
+## What it provides
+
+- **Inline diagnostics** for dead URLs, payload mismatches, and over-fetching in the current file.
+- **Hover explanations** on any contracted endpoint URL.
+- **Autocomplete** for endpoint URLs and payload fields defined in `bazable.config.json`.
+
+## Prerequisites
+
+- Your project must contain a valid `bazable.config.json`.
+- Your editor must be configured to connect to a stdio LSP server that runs `bazable lsp`.
+
+## Example
+
+```bash
+bazable lsp
+```
+
+<Tip>
+  For AI coding agents (Cursor, Cline, Claude Code), use [`bazable mcp`](/commands/mcp) and [`bazable gen context`](/commands/generate-context) instead.
+</Tip>
