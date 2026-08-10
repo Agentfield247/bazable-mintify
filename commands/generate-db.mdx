@@ -1,0 +1,30 @@
+---
+title: "bazable gen db"
+sidebarTitle: "gen db"
+description: "Generate a Prisma model or Supabase SQL migration from an endpoint's schemas."
+keywords: ["bazable gen db", "Prisma generator", "Supabase migration", "database schema", "ORM"]
+---
+
+Generates a database schema (Prisma model or Supabase SQL migration) from an endpoint's request and response schemas.
+
+## Usage
+
+```bash
+bazable gen db <method> <url> [options]
+```
+
+## Options
+
+<ParamField query="-o, --output" default="./generated-db" type="string">
+  Output directory.
+</ParamField>
+
+<ParamField query="--orm" default="prisma" type="string">
+  ORM framework. One of `prisma` or `supabase`.
+</ParamField>
+
+## Example
+
+```bash
+bazable gen db POST https://api.example.com/v1/settlements --orm prisma
+```

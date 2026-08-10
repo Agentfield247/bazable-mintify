@@ -39,7 +39,8 @@
           "commands/curl",
           "commands/docs",
           "commands/errors",
-          "commands/export"
+          "commands/export",
+          "commands/generate-db"
         ]
       },
       {
