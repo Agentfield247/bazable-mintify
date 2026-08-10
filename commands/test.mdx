@@ -14,25 +14,52 @@ bazable test [options]
 
 ## Options
 
-- `-t, --token <token>` : Access token
-- `-e, --email <email>` : Auto‑login email
-- `-p, --password <password>` : Auto‑login password
-- `-m, --method <method>` : HTTP method (default GET)
-- `-w, --write` : Allow testing of write endpoints
-- `-k, --mock` : Mock mode (no real requests)
-- `-a, --all` : Test all endpoints regardless of status
-- `-x, --exclude <urls...>` : Skip specific endpoints
+<ParamField query="-t, --token" type="string">
+  Access token for authenticated endpoints.
+</ParamField>
+
+<ParamField query="-e, --email" type="string">
+  Auto-login email.
+</ParamField>
+
+<ParamField query="-p, --password" type="string">
+  Auto-login password.
+</ParamField>
+
+<ParamField query="-m, --method" default="GET" type="string">
+  HTTP method to use when testing.
+</ParamField>
+
+<ParamField query="-w, --write" type="boolean">
+  Allow testing of write endpoints (POST, PUT, PATCH, DELETE).
+</ParamField>
+
+<ParamField query="-k, --mock" type="boolean">
+  Mock mode. Does not send real HTTP requests.
+</ParamField>
+
+<ParamField query="-a, --all" type="boolean">
+  Test all endpoints regardless of status.
+</ParamField>
+
+<ParamField query="-x, --exclude" type="string[]">
+  Skip specific endpoints by URL.
+</ParamField>
+
+<Warning>
+  Use `--write` with care against live APIs. It will send POST, PUT, PATCH, and DELETE requests.
+</Warning>
 
 ## Examples
 
-Mock‑test all endpoints:
+<CodeGroup>
 
-```bash
+```bash Mock-test all
 bazable test -k -a
 ```
 
-Real test with auto‑login:
-
-```bash
+```bash Real test with auto-login
 bazable test -e admin@example.com -p secret123 -m POST -w
 ```
+
+</CodeGroup>

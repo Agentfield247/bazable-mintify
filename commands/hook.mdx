@@ -14,10 +14,16 @@ bazable hook
 
 ## Options
 
-None.
+<Info>
+  This command takes no options.
+</Info>
 
 ## Example
 
 ```bash
 bazable hook
 ```
+
+<Warning>
+  Pre-push hooks live in `.git/hooks/` and are not committed. Every teammate must run `bazable hook` in their own clone.
+</Warning>

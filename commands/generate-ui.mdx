@@ -15,20 +15,28 @@ bazable gen ui <method> <url> [options]
 
 ## Options
 
-- `-o, --output <dir>` : Output directory (default `./generated-ui`)
-- `--ai` : Use an LLM to generate the UI
-- `--framework <name>` : Target framework when using `--ai` (for example, `react-tailwind`)
+<ParamField query="-o, --output" default="./generated-ui" type="string">
+  Output directory for the generated form.
+</ParamField>
+
+<ParamField query="--ai" type="boolean">
+  Use an LLM to generate the UI.
+</ParamField>
+
+<ParamField query="--framework" type="string">
+  Target framework when using `--ai` (for example, `react-tailwind`).
+</ParamField>
 
 ## Examples
 
-Standalone HTML form (default):
+<CodeGroup>
 
-```bash
+```bash Standalone HTML
 bazable gen ui POST https://api.example.com/v1/settlements -o ./my-forms
 ```
 
-Generate a React \+ Tailwind form using AI:
-
-```bash
+```bash React + Tailwind (AI)
 bazable gen ui POST https://api.example.com/v1/settlements --ai --framework react-tailwind
 ```
+
+</CodeGroup>

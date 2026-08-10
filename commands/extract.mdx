@@ -14,29 +14,48 @@ bazable extract [options]
 
 ## Options
 
-- `-r, --payloads` : Also infer request payload schemas
-- `-s, --preset <name>` : Use a pre‑configured pattern (py, php, go, rb, js, ax)
-- `--pattern <regex>` : Custom regex for URL extraction
-- `--ext <extensions...>` : File extensions to scan (e.g. `.py .rb`)
-- `--ignore <patterns...>` : Glob patterns to ignore (e.g. `venv dist`)
-- `--wrapper <names...>` : Custom API wrapper function names
+<ParamField query="-r, --payloads" type="boolean">
+  Also infer request payload schemas.
+</ParamField>
+
+<ParamField query="-s, --preset" type="string">
+  Use a pre-configured extraction pattern. One of `py`, `php`, `go`, `rb`, `js`, `ax`.
+</ParamField>
+
+<ParamField query="--pattern" type="regex">
+  Custom regex for URL extraction.
+</ParamField>
+
+<ParamField query="--ext" type="string[]">
+  File extensions to scan (for example, `.py .rb`).
+</ParamField>
+
+<ParamField query="--ignore" type="string[]">
+  Glob patterns to ignore (for example, `venv dist`).
+</ParamField>
+
+<ParamField query="--wrapper" type="string[]">
+  Custom API wrapper function names.
+</ParamField>
 
 ## Examples
 
-Standard extraction with payload inference:
+<CodeGroup>
 
-```bash
+```bash Standard
 bazable extract -r
 ```
 
-Python project:
-
-```bash
+```bash Python
 bazable extract -s py
 ```
 
-Custom regex:
-
-```bash
+```bash Custom regex
 bazable extract --pattern 'requests\.get\("([^"]+)"' --ext .py
 ```
+
+</CodeGroup>
+
+<Tip>
+  Run [`bazable inspect`](/commands/inspect) after extraction to validate that your code still matches the contract.
+</Tip>

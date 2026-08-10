@@ -6,9 +6,23 @@ description: "Passwordless login with OAuth 2.0 Device Flow"
 
 Bazable uses OAuth 2.0 Device Flow for passwordless login.
 
-1. Run any cloud command (`push`, `sync`, `watch`).
-2. The CLI prints a clickable link.
-3. Open it in your browser; sign in with GitHub or email.
-4. The device is approved automatically, and the CLI continues.
+## How it works
 
-No passwords stored. Token is cached locally for future commands.
+<Steps>
+  <Step title="Run any cloud command">
+    Trigger the flow by running [`push`](/commands/push), [`sync`](/commands/sync), or `watch`.
+  </Step>
+  <Step title="Open the printed link">
+    The CLI prints a clickable authorization URL.
+  </Step>
+  <Step title="Sign in">
+    Open the link in your browser and sign in with GitHub or email.
+  </Step>
+  <Step title="Automatic approval">
+    The device is approved automatically and the CLI continues where it left off.
+  </Step>
+</Steps>
+
+<Info>
+  No passwords are stored. The access token is cached locally for future commands.
+</Info>

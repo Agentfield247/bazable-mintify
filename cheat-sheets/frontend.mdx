@@ -4,19 +4,35 @@ sidebarTitle: "Frontend"
 description: "Common Bazable workflows for frontend developers"
 ---
 
-## First-time Setup
+## First-time setup
 
-```bash
-npm install -g bazable-api
-cd your-frontend
-bazable init
-bazable extract --payloads          # discover all APIs + request schemas
-bazable inspect                     # check for violations
-bazable test --mock --all           # mock-test every endpoint
-bazable hook                        # block broken contracts before push
-```
+<Steps>
+  <Step title="Install the CLI">
+    ```bash
+    npm install -g bazable-api
+    ```
+  </Step>
+  <Step title="Initialize and extract">
+    ```bash
+    cd your-frontend
+    bazable init
+    bazable extract --payloads
+    ```
 
-## Daily Workflow
+    Discovers all APIs and request schemas from your code.
+  </Step>
+  <Step title="Validate and enforce">
+    ```bash
+    bazable inspect
+    bazable test --mock --all
+    bazable hook
+    ```
+
+    Checks violations, mock-tests every endpoint, and blocks broken contracts before push.
+  </Step>
+</Steps>
+
+## Daily workflow
 
 ```bash
 bazable sync                        # get latest contract from backend
@@ -28,15 +44,19 @@ bazable test --all --token <token>  # test against real API
 
 ```bash
 bazable sync                        # pull updated contract
-bazable inspect --fix               # auto‑fix type mismatches in your code
+bazable inspect --fix               # auto-fix type mismatches in your code
 bazable serve                       # start mock server with new contract
 ```
 
-## Handy Options
+## Handy options
 
-```bash
-bazable extract -r                  # short for --payloads
-bazable inspect -f                  # short for --fix
-bazable test -a -k                  # mock‑test all endpoints
-bazable ui                          # visual dashboard
-```
+| Shortcut | Full flag | Purpose |
+| --- | --- | --- |
+| `bazable extract -r` | `--payloads` | Infer request payloads. |
+| `bazable inspect -f` | `--fix` | Auto-fix type mismatches. |
+| `bazable test -a -k` | `--all --mock` | Mock-test every endpoint. |
+| `bazable ui` | — | Open the visual dashboard. |
+
+<Tip>
+  See the [Backend cheat sheet](/cheat-sheets/backend) for the API-side workflow.
+</Tip>

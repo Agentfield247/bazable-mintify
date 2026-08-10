@@ -6,6 +6,10 @@ description: "Pull latest contract from Bazable Cloud"
 
 Pulls the latest contract from Bazable Cloud and overwrites the local `bazable.config.json`.
 
+<Warning>
+  `sync` overwrites your local `bazable.config.json`. Commit any local contract changes first, or push them with [`bazable push`](/commands/push).
+</Warning>
+
 ## Usage
 
 ```bash
@@ -14,7 +18,9 @@ bazable sync
 
 ## Options
 
-None.
+<Info>
+  This command takes no options.
+</Info>
 
 ## Example
 

@@ -1,6 +1,11 @@
-# bazable gen context
+---
+title: "bazable gen context"
+sidebarTitle: "gen context"
+description: "Generate AI agent context files so Cursor, Cline, and Roo Code respect your Bazable contract."
+keywords: ["bazable gen context", "AI context files", "Cursor", "Cline", "Roo Code", "AI agent rules"]
+---
 
-Generates AI agent context files in your project root so that AI coding tools (Cursor, Cline, Roo Code) automatically respect your Bazable contract.
+Generates AI agent context files in your project root so AI coding tools (Cursor, Cline, Roo Code) automatically respect your Bazable contract.
 
 ## Usage
 
@@ -10,27 +15,47 @@ bazable gen context
 
 ## Options
 
-- `-o, --output <dir>` : Output directory for the generated files (default is the current working directory)
+<ParamField query="-o, --output" default="cwd" type="string">
+  Output directory for the generated files.
+</ParamField>
 
 ## What it creates
 
-| File | Purpose |
-|------|---------|
-| `.cursorrules` | Instructions for **Cursor IDE**. Cursor reads this file and follows the rules when suggesting or writing code. |
-| `.clinerules` | Instructions for **Cline / Roo Code / VS Code** agents. These tools use the rules to avoid hallucinating API calls. |
-| `.mcp.json` | Pre‑configures **Bazable’s MCP server** as an active tool. MCP‑compatible agents (like Cursor with MCP) can then call `bazable.inspect`, `bazable.listEndpoints`, etc. directly. |
+<CardGroup cols={1}>
+  <Card title=".cursorrules" icon="file-code">
+    Instructions for **Cursor IDE**. Cursor reads this file and follows the rules when suggesting or writing code.
+  </Card>
 
-## What to do after generation
+  <Card title=".clinerules" icon="file-code">
+    Instructions for **Cline**, **Roo Code**, and other VS Code agents. These tools use the rules to avoid hallucinating API calls.
+  </Card>
 
-1. **Restart your AI coding tool** (Cursor, Cline, etc.) – it will automatically detect the new context files.
-2. **Start the MCP server** in your project directory if you want real‑time contract data:
-   ```bash
-   bazable mcp
-   ```
-3. The AI agent will now:
-   - Check `bazable.config.json` instead of inventing API endpoints.
-   - Use your generated `bazableClient` or `bazable-types` for type‑safe API calls.
-   - Verify contract compliance before proposing changes.
+  <Card title=".mcp.json" icon="plug">
+    Pre-configures Bazable's MCP server as an active tool. MCP-compatible agents can call `bazable.inspect`, `bazable.listEndpoints`, and more directly.
+  </Card>
+</CardGroup>
+
+## After generation
+
+<Steps>
+  <Step title="Restart your AI coding tool">
+    Cursor, Cline, and similar tools automatically detect the new context files after a restart.
+  </Step>
+  <Step title="Start the MCP server">
+    Run the following in your project directory for real-time contract data:
+
+    ```bash
+    bazable mcp
+    ```
+  </Step>
+  <Step title="Let the agent use the contract">
+    The AI agent will now:
+
+    - Check `bazable.config.json` instead of inventing API endpoints.
+    - Use your generated `bazableClient` or `bazable-types` for type-safe API calls.
+    - Verify contract compliance before proposing changes.
+  </Step>
+</Steps>
 
 ## Example
 
@@ -38,10 +63,14 @@ bazable gen context
 bazable gen context
 ```
 
-After running, you’ll see:
+Output:
 
-```
+```text
 ✦ Generated .cursorrules
 ✦ Generated .clinerules
 ✦ Generated .mcp.json
 ```
+
+<Tip>
+  Pair this with [`bazable mcp`](/commands/mcp) to give your AI agent live access to inspect results and endpoint schemas.
+</Tip>

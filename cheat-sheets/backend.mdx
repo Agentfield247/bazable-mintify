@@ -4,17 +4,33 @@ sidebarTitle: "Backend"
 description: "Common Bazable workflows for backend developers"
 ---
 
-## First-time Setup
+## First-time setup
 
-```bash
-npm install -g bazable-api
-cd your-backend
-bazable init
-bazable extract --payloads                       # discover APIs from your own code
-bazable push                                     # upload contract to cloud (creates project)
-```
+<Steps>
+  <Step title="Install the CLI">
+    ```bash
+    npm install -g bazable-api
+    ```
+  </Step>
+  <Step title="Initialize and extract">
+    ```bash
+    cd your-backend
+    bazable init
+    bazable extract --payloads
+    ```
 
-## Daily Workflow
+    Discovers APIs from your own code and infers request payloads.
+  </Step>
+  <Step title="Publish the contract">
+    ```bash
+    bazable push
+    ```
+
+    Creates a cloud project on first push and uploads the contract.
+  </Step>
+</Steps>
+
+## Daily workflow
 
 ```bash
 bazable diff https://api.example.com/v1/users    # check if live API matches contract
@@ -29,11 +45,15 @@ bazable sync                                     # pull latest contract from clo
 bazable generate backend --framework express     # generate route stubs from contract
 ```
 
-## Handy Options
+## Handy options
 
-```bash
-bazable serve                                    # spin up mock server for testing
-bazable ui                                       # view contract visually
-bazable import openapi.yaml                      # import existing spec
-bazable inspect                                  # validate backend code too
-```
+| Command | Purpose |
+| --- | --- |
+| `bazable serve` | Spin up a mock server for testing. |
+| `bazable ui` | View the contract visually. |
+| `bazable import openapi.yaml` | Import an existing OpenAPI spec. |
+| `bazable inspect` | Validate backend code against the contract. |
+
+<Tip>
+  See the [Frontend cheat sheet](/cheat-sheets/frontend) for the client-side workflow.
+</Tip>

@@ -5,22 +5,37 @@ description: "Start a Model Context Protocol server so AI coding agents can inte
 keywords: ["bazable mcp", "Model Context Protocol", "MCP server", "AI agents", "AI integration"]
 ---
 
-Starts a **Model Context Protocol (MCP) server** that allows AI coding agents (Cursor, Claude Code, Copilot, etc.) to interact with Bazable natively.
+Starts a **Model Context Protocol (MCP) server** that lets AI coding agents (Cursor, Claude Code, Copilot, and more) interact with Bazable natively.
 
-Once started, the server listens on `stdin`/`stdout` for JSON‑RPC requests and exposes real, production‑ready tools that inspect your contract and run tests.
-
----
+Once started, the server listens on `stdin`/`stdout` for JSON-RPC requests and exposes production-ready tools that inspect your contract and run tests.
 
 ## Available tools
 
-| Tool | Description | Input |
-| --- | --- | --- |
-| `listEndpoints` | Returns all contracted endpoints with their HTTP methods and statuses. | _(none)_ |
-| `getEndpoint` | Returns the request and response schemas for a specific endpoint. | `method` (string), `url` (string) |
-| `inspect` | Runs a full contract inspection (`bazable inspect --json --ci`) and returns violations as JSON. | _(none)_ |
-| `test` | Runs mock tests on all endpoints (`bazable test --json --mock --all`) and returns pass/fail results. | _(none)_ |
+<AccordionGroup>
+  <Accordion title="listEndpoints" icon="list">
+    Returns all contracted endpoints with their HTTP methods and statuses.
 
----
+    **Input:** none.
+  </Accordion>
+
+  <Accordion title="getEndpoint" icon="magnifying-glass">
+    Returns the request and response schemas for a specific endpoint.
+
+    **Input:** `method` (string), `url` (string).
+  </Accordion>
+
+  <Accordion title="inspect" icon="shield-check">
+    Runs a full contract inspection (`bazable inspect --json --ci`) and returns violations as JSON.
+
+    **Input:** none.
+  </Accordion>
+
+  <Accordion title="test" icon="flask">
+    Runs mock tests on all endpoints (`bazable test --json --mock --all`) and returns pass/fail results.
+
+    **Input:** none.
+  </Accordion>
+</AccordionGroup>
 
 ## Usage
 
@@ -30,10 +45,16 @@ bazable mcp
 
 ## Options
 
-None.
+<Info>
+  This command takes no options.
+</Info>
 
 ## Example
 
 ```bash
 bazable mcp
 ```
+
+<Tip>
+  Run [`bazable gen context`](/commands/generate-context) first to auto-configure Cursor and Cline with the MCP server.
+</Tip>

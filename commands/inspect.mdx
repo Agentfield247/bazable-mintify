@@ -14,19 +14,28 @@ bazable inspect [options]
 
 ## Options
 
-- `-f, --fix` : Auto‑correct simple type mismatches in source files
-- All extraction options (presets, patterns, extensions, etc.)
+<ParamField query="-f, --fix" type="boolean">
+  Auto-correct simple type mismatches directly in source files.
+</ParamField>
+
+<Note>
+  `inspect` also accepts all [`bazable extract`](/commands/extract) options (presets, patterns, extensions, and more).
+</Note>
 
 ## Examples
 
-Check for violations:
+<CodeGroup>
 
-```bash
+```bash Check for violations
 bazable inspect
 ```
 
-Auto‑fix payload mismatches:
-
-```bash
+```bash Auto-fix mismatches
 bazable inspect -f
 ```
+
+</CodeGroup>
+
+<Tip>
+  Enforce contracts automatically with [`bazable hook`](/commands/hook) or [`bazable ci`](/commands/ci).
+</Tip>

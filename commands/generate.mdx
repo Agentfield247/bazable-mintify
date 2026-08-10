@@ -8,7 +8,9 @@ Generates backend code from the contract.
 
 ## Subcommands
 
-- `backend` : Express.js or Hono router stubs with validation
+<Card title="backend" icon="server">
+  Express.js or Hono router stubs with Zod validation.
+</Card>
 
 ## Usage
 
@@ -18,12 +20,24 @@ bazable gen backend [options]
 
 ## Options
 
-- `-f, --framework <name>` : express or hono
-- `-o, --output <dir>` : Output directory
-- `-v, --no-validation` : Skip Zod validation schemas
+<ParamField query="-f, --framework" type="string">
+  Target framework. One of `express` or `hono`.
+</ParamField>
+
+<ParamField query="-o, --output" type="string">
+  Output directory for generated files.
+</ParamField>
+
+<ParamField query="-v, --no-validation" type="boolean">
+  Skip Zod validation schemas.
+</ParamField>
 
 ## Example
 
 ```bash
 bazable gen backend -f express -o ./api
 ```
+
+<Tip>
+  Pair with [`bazable gen ui`](/commands/generate-ui) to scaffold matching frontend forms from the same contract.
+</Tip>
