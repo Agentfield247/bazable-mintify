@@ -1,0 +1,180 @@
+# Bazable – Full AI Agent Guide (llms-full.txt)
+Bazable is a Git‑native API contract management CLI.
+It reads your codebase (frontend, backend, or both), builds an API contract automatically, and enforces it across your team with cloud sync, mock servers, and backend code generation.
+## Architecture Overview
+- Contract file: bazable.config.json (versioned JSON)
+- Commands: 30+ CLI commands under bin/index.js, each importing logic from src/commands/
+- Utilities: config loader, credentials manager, error logger, dynamic API base URL resolver, CSV parser, AI wrapper
+- Parsers: Babel AST (JS/TS/HTML) + regex presets for Python, PHP, Go, Ruby; also template literal handling, variable-following payload inference
+- Generators: Express/Hono routers, vanilla HTML forms, React+Tailwind components, Prisma models, Supabase SQL migrations, AI agent context files
+- Cloud Sync: Device‑code OAuth2 flow with Supabase backend (Render hosted), optional – works offline entirely
+- MCP server: Model Context Protocol server for AI coding agents
+- LSP: Language Server Protocol for in‑editor diagnostics and hover tooltips
+- Dashboard: Local web UI (dark/light theme) with API tester, schema editor, AI features, and proxy to avoid CORS
+## Core Concepts
+- Endpoints are stored as keys: "METHOD full‑URL" (e.g. "GET https://api.example.com/v1/users")
+- Each endpoint entry can have: method, request schema (inferred types), response schema, schema_status
+- Base URL detection: automatic from constants like API_BASE, BASE_URL, or static parts of template literals
+- Multi‑base‑URL support: baseUrls array for projects using multiple backends
+- Project context validation: prevents accidental use of contract from a different project
+## Full Command Reference
+### init
+- Description: Create bazable.config.json with project name from package.json
+- Options: none
+- Example: bazable init
+### add [url]
+- Description: Fetch a live endpoint and store its response schema
+- Options: -m (method), -t (token), -H (header)
+- Example: bazable add https://api.example.com/v1/users --method POST --token abc
+### extract (ext, e)
+- Description: Scan code for API calls, add undocumented endpoints
+- Options: -r (--payloads) infer request schemas, -s (--preset), --pattern, --ext, --ignore, --wrapper
+- Auto‑detects any function name containing "fetch" or "api"
+- Handles template literals, follows variable assignments
+- Example: bazable extract -r -s py
+### import (imp)
+- Description: Import OpenAPI/Swagger/Postman/CSV
+- Options: -b (base‑url), --csv [file], --name [endpoint]
+- Auto‑detects format (JSON/YAML)
+- Example: bazable import openapi.yaml
+- CSV: bazable import --csv products.csv --name products
+### config
+- Description: View/update contract settings
+- Options: --get, --set-project-name, --set-base-url, --set-webhook, --set-ai-key, --set-ai-base, --set-ai-model
+- Example: bazable config --set-ai-key sk-...
+### inspect (i, check)
+- Description: Validate code against contract (dead URLs, payload mismatches, over‑fetching)
+- Options: -f (--fix) auto‑correct, --json, --ci, all extraction options
+- Multi‑base URL resolution
+- Example: bazable inspect --json
+### test
+- Description: Real HTTP tests on all endpoints
+- Options: -t (token), -e (email) + -p (password) auto‑login, -m, -H, -d, --base-url, --base-path, --all, --mock, -w (write), -x (exclude), --json, --ci
+- Intelligent failure classification
+- Example: bazable test --mock --all
+### diff [url]
+- Description: Compare stored schema against live API
+- Options: -t, -m, --base-url, --base-path, --breaking-only, --json, --accept
+- Example: bazable diff --json
+### types
+- Description: Generate TypeScript interfaces
+- Options: -o, --stdout, --prefix, --name
+- Example: bazable types -o ./types
+### client
+- Description: Generate typed API client (bazableClient.ts)
+- Options: -o, --stdout, --prefix
+- Example: bazable client
+### generate (gen)
+  - Subcommand: backend
+    - Options: -f (framework: express, hono), -o, --no‑validation
+    - Example: bazable gen backend -f express
+  - Subcommand: ui
+    - Description: Generate form component (vanilla HTML default, or React+Tailwind)
+    - Options: -o, --framework (html, react-tailwind), --ai
+    - Example: bazable gen ui POST /v1/users --ai --framework react-tailwind
+  - Subcommand: db
+    - Description: Generate Prisma model or Supabase SQL migration
+    - Options: -o, --orm (prisma, supabase)
+    - Example: bazable gen db POST /v1/settlements --orm prisma
+  - Subcommand: context
+    - Description: Create .cursorrules, .clinerules, .mcp.json
+    - Options: -o
+    - Example: bazable gen context
+### curl
+- Description: Raw HTTP request with logging, no CORS
+- Options: -X (method), -H (headers), -d (body)
+- Example: bazable curl https://jsonplaceholder.typicode.com/posts/1
+### serve (s)
+- Description: Mock server from contract, smart faker data
+- Options: -p (port), -d (delay), --seed (CSV file)
+- Stateful CRUD for POST/PUT, CSV seeding for GET
+- Example: bazable serve --seed products.csv
+### ui
+- Description: Local web dashboard
+- Options: -p (port)
+- Dashboard features: endpoints table, API tester (proxy), Add/Edit/Delete, AI Explain/Propose, Settings, login, dark/light mode
+- Example: bazable ui
+### docs
+- Description: Generate static API documentation HTML
+- Options: -o
+- Example: bazable docs -o ./docs
+### export
+- Description: Export contract as OpenAPI 3.0 spec
+- Options: -o
+- Example: bazable export -o openapi.json
+### hook
+- Description: Install pre‑push Git hook (runs inspect)
+- Skip with BAZABLE_SKIP=1
+- Example: bazable hook
+### errors
+- Description: View/clear persistent error log (~/.bazable/errors.log)
+- Options: -c (clear), -n (lines)
+- Example: bazable errors
+### login / logout
+- Description: Store/remove API credentials and cloud tokens
+- Options (login): -e, -p, -t, -b, --supabase-url, --supabase-key
+- Example: bazable login -e admin@test.com -p secret
+### watch
+- Description: Continuous cloud sync + auto‑fix
+- Options: -i (interval), --dry-run, --auto-accept
+- Works with cloud project ID or raw URL
+- Example: bazable watch
+### push
+- Description: Upload contract to Bazable Cloud (creates project on first push)
+- Auto‑saves cloudProjectId and cloud.apiBaseUrl into config
+- Example: bazable push
+### sync
+- Description: Pull latest contract from cloud, or specific version
+- Options: --version [v], -t (headless token)
+- Example: bazable sync --version 2
+### mcp
+- Description: Start Model Context Protocol server for AI agents
+- Tools: listEndpoints, getEndpoint, inspect, test
+- Example: bazable mcp
+### ci
+- Description: Generate GitHub Actions workflow (PR enforcement)
+- Options: --token (include headless auth)
+- Example: bazable ci
+### explain [method] [url]
+- Description: AI‑generated plain‑English explanation of endpoint
+- Requires AI key configured
+- Example: bazable explain POST https://api.example.com/v1/users
+### propose [request]
+- Description: AI proposes a schema change, saves to pending_proposals
+- Requires AI key configured
+- Example: bazable propose "Add phone field"
+### accept [proposalId]
+- Description: Apply a pending AI proposal to the contract
+- Example: bazable accept 1691501234567
+### lsp
+- Description: Start Language Server Protocol engine for editors
+- Real‑time diagnostics and hover tooltips
+- Example: bazable lsp
+## Environment / Configuration
+- Credentials stored in ~/.bazable/credentials.json
+- AI keys, base URL, model stored in bazable.config.json (aiApiKey, aiBaseUrl, aiModel)
+- Cloud API base URL resolved via: local config > env var BAZABLE_API_URL > default (https://bazable-cloud.onrender.com)
+- Webhook URL for Slack/Discord notifications on push
+## Common Workflows
+1. Frontend developer: init → extract -r → inspect → test --mock --all → hook
+2. Backend developer: init → extract -r → push → (frontend sync)
+3. Team sync: backend push → frontend watch (auto‑fix on change)
+4. AI negotiation: explain → propose → accept
+## Supported Languages for Extraction
+- Built‑in AST: JavaScript, TypeScript, JSX, TSX, HTML (embedded scripts)
+- Presets (regex): Python (requests), PHP (Guzzle), Go (net/http), Ruby (Net::HTTP), Node fetch, Axios
+- Custom regex with --pattern and --ext
+- Template literal support (static parts extracted)
+- Base URL auto‑detection (API_BASE, BASE_URL constants)
+## Important Notes for AI Agents
+- All commands that produce contract violations (inspect, test, diff) support --json for machine‑readable output.
+- The dashboard proxy endpoint /api/proxy allows sending requests with custom headers/body and returns { status, data }.
+- MCP server operates over stdin/stdout JSON‑RPC; tools: listEndpoints, getEndpoint, inspect, test.
+- LSP server communicates via standard I/O using vscode-languageserver/node; provides diagnostics and hover for JS/TS/HTML files.
+- CSV import infers schema types (string, number, boolean) from first data row.
+- ORM generator supports Prisma and Supabase SQL; reads request+response fields.
+- Agent context generator creates .cursorrules, .clinerules, and .mcp.json with Bazable‑specific instructions.
+## Documentation & Support
+- Full docs: https://bazable.mintlify.app
+- GitHub: https://github.com/Agentfield247/bazable
+- Issues: https://github.com/Agentfield247/bazable/issues
