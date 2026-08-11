@@ -1,0 +1,21 @@
+# Bazable
+Bazable is a Git‑native API contract management CLI.
+It scans your codebase, builds an API contract automatically, and enforces it across your team with cloud sync, mock servers, and backend code generation.
+## Core Concepts
+- Contract (bazable.config.json): versioned JSON file that defines all API endpoints, request/response schemas, and project settings.
+- Extraction: AST-based scanning of JS/TS/HTML plus regex presets for Python, PHP, Go, Ruby to discover API calls.
+- Enforcement: `bazable inspect` detects dead URLs, payload type mismatches, and over‑fetching.
+- Cloud Sync: device‑code authentication backed by Supabase; backend pushes contracts, frontend syncs them.
+## Key Documentation Pages
+- Introduction: /introduction
+- Installation: /installation
+- Quick Start: /quickstart
+- Full Command Reference: /commands
+- Cloud Sync Guide: /cloud-sync
+- AI & CI Features: /ai-and-ci
+- Frontend Cheat Sheet: /frontend-cheat-sheet
+- Backend Cheat Sheet: /backend-cheat-sheet
+- MCP (AI Agent) Server: /commands/mcp
+- LSP (Editor Integration): /commands/lsp
+## Available Commands (summary)
+init, add, extract, import, config, inspect, test, diff, types, client, generate backend, gen ui, gen db, curl, serve, ui, docs, export, hook, errors, login/logout, watch, push, sync, mcp, ci, explain, propose, accept, lsp
