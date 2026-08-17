@@ -41,6 +41,9 @@ bazable push
   <Step title="Notify via webhook">
     If you have set a webhook URL (`bazable config --set-webhook`), a notification is sent to your Slack or Discord channel.
   </Step>
+  <Step title="Broadcast real-time update">
+    The cloud server broadcasts a `contract_updated` WebSocket message to every connected [`bazable watch`](/cloud/watch) client for this project, triggering an immediate auto-fix on teammate machines.
+  </Step>
 </Steps>
 
 <Tip>

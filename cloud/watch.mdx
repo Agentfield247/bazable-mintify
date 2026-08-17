@@ -5,7 +5,9 @@ description: "Continuously poll a remote contract and auto-fix your code on chan
 keywords: ["bazable watch", "contract polling", "auto-fix", "live contract sync"]
 ---
 
-Continuously polls a remote contract (or cloud project) and auto-fixes your code on changes.
+Continuously syncs a remote contract (or cloud project) and auto-fixes your code the moment it changes.
+
+When run against a linked cloud project, `bazable watch` opens a **real-time WebSocket** connection to Bazable Cloud and reacts instantly to `contract_updated` events. If the WebSocket cannot connect, drops, or is disabled with `--no-ws`, it automatically falls back to HTTP polling.
 
 ## Usage
 
@@ -16,7 +18,7 @@ bazable watch [url] [options]
 ## Options
 
 <ParamField query="-i, --interval" default={60} type="number">
-  Polling interval in seconds.
+  Polling interval in seconds. Only used when WebSocket is disabled or fails.
 </ParamField>
 
 <ParamField query="--dry-run" type="boolean">
@@ -27,16 +29,43 @@ bazable watch [url] [options]
   Automatically apply all changes.
 </ParamField>
 
+<ParamField query="--no-ws" type="boolean">
+  Disable WebSocket real-time sync and use polling instead.
+</ParamField>
+
 ## Examples
 
 <CodeGroup>
 
-```bash Watch a remote contract
-bazable watch https://api.example.com/contract.json
-```
-
-```bash Watch the linked cloud project
+```bash Cloud project (real-time WebSocket)
 bazable watch
 ```
 
+```bash Raw URL (polling)
+bazable watch https://api.example.com/contract.json
+```
+
+```bash Force polling for a cloud project
+bazable watch --no-ws
+```
+
 </CodeGroup>
+
+## How real-time sync works
+
+1. `bazable watch` reads `cloudProjectId` and `cloud.apiBaseUrl` from `bazable.config.json`.
+2. It derives the WebSocket URL by swapping `http` for `ws` (or `https` for `wss`) and appending `/ws?projectId=[projectId]`.
+3. When [`bazable push`](/commands/push) uploads a new contract version, the server broadcasts:
+   ```json
+   {"type":"contract_updated","projectId":"...","version":2}
+   ```
+4. On receipt, `bazable watch` immediately runs `bazable inspect --fix` — no waiting for the next poll interval.
+5. If the socket closes or errors, the client falls back to polling at `--interval` seconds.
+
+<Note>
+  Real-time sync requires a linked cloud project. Run [`bazable push`](/commands/push) once to link the project and populate `cloudProjectId`. Use `--no-ws` in environments where outbound WebSocket connections are blocked (some corporate proxies, restricted CI runners).
+</Note>
+
+<Tip>
+  Prefer `bazable watch` over manual [`bazable sync`](/commands/sync) when you want your local code to stay in lockstep with the backend contract as it evolves.
+</Tip>
