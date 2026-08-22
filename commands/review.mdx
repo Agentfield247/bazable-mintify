@@ -10,14 +10,18 @@ Renders a human-readable audit of your contract so you can see exactly **where e
 ## Usage
 
 ```bash
-bazable review
+bazable review [options]
 ```
 
 ## Options
 
-<Info>
-  This command takes no options.
-</Info>
+<ParamField query="--filter" type="string">
+  Filter endpoints by URL substring or regex (case-insensitive). Falls back to substring match if the pattern is not a valid regex.
+</ParamField>
+
+<ParamField query="--json" type="boolean">
+  Output the report as JSON. Useful for piping into other tools or CI checks.
+</ParamField>
 
 ## What it shows
 
@@ -53,6 +57,46 @@ POST https://api.example.com/v1/users
   📤 Response schema:
     - id: string
     - createdAt: string
+```
+
+## Filtering and JSON output
+
+<CodeGroup>
+
+```bash Filter by substring
+bazable review --filter users
+```
+
+```bash Filter by regex
+bazable review --filter "^POST https://api\\.example\\.com/v1/"
+```
+
+```bash Machine-readable
+bazable review --json
+```
+
+```bash Pipe to jq
+bazable review --json | jq '."POST https://api.example.com/v1/users".request_meta'
+```
+
+</CodeGroup>
+
+The JSON shape mirrors what is stored in `bazable.config.json`:
+
+```json
+{
+  "POST https://api.example.com/v1/users": {
+    "provenance": [
+      { "file": "src/pages/signup.tsx", "line": 42, "column": 18 }
+    ],
+    "request": { "email": "string", "name": "string" },
+    "request_meta": {
+      "email": { "inferred": true, "confidence": "high", "source_value": "user@example.com", "source_type": "StringLiteral" },
+      "name":  { "inferred": true, "confidence": "medium", "source_value": null, "source_type": "Identifier" }
+    },
+    "response": { "id": "string", "createdAt": "string" }
+  }
+}
 ```
 
 ## When to use it

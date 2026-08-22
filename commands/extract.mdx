@@ -79,6 +79,12 @@ Every extraction records **provenance** (the file, line, and column of each call
 
 Use [`bazable review`](/commands/review) to render this as a human-readable audit report with flags for fields that need confirmation.
 
+### Accuracy notes
+
+- **HTML script blocks:** line numbers in `provenance` are computed against the whole HTML file, not the inner `<script>` block, so they point straight to the call site in your editor.
+- **Cross-block variables:** payloads declared as a variable in one `<script>` block and used in another are resolved. Bazable collects variable definitions across all blocks in a file before matching them to API calls.
+- **New endpoints** are seeded with `schema_status: "unverified"` so they show up in [`bazable inspect`](/commands/inspect) until you confirm the schema.
+
 <Tip>
   Run [`bazable inspect`](/commands/inspect) after extraction to validate that your code still matches the contract, and [`bazable review`](/commands/review) to audit which inferred fields are low confidence.
 </Tip>
