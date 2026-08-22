@@ -1,0 +1,84 @@
+---
+title: "bazable review"
+sidebarTitle: "review"
+description: "Audit provenance and inference confidence for every endpoint in your contract."
+keywords: ["bazable review", "provenance", "field metadata", "inference confidence", "contract audit"]
+---
+
+Renders a human-readable audit of your contract so you can see exactly **where each endpoint came from** and **how confident** Bazable is about every inferred field. Use it to review assumptions before pushing to teammates or CI.
+
+## Usage
+
+```bash
+bazable review
+```
+
+## Options
+
+<Info>
+  This command takes no options.
+</Info>
+
+## What it shows
+
+For every endpoint in `bazable.config.json`, `bazable review` prints:
+
+- **Sources** — file, line, and column of every call site that referenced the URL (provenance).
+- **Request schema** — each field with its inferred type, confidence level, and the original source value when available.
+- **Response schema** — fields and types (when captured).
+
+Fields flagged `low` or `medium` confidence are marked ⚠️ **needs confirmation** so you can review them before trusting them in production.
+
+## Confidence levels
+
+| Confidence | Meaning |
+| --- | --- |
+| `high` | Value was a literal (string, number, boolean, null) in the source. |
+| `medium` | Value came from an identifier (variable) or object expression. Type is a best guess. |
+| `low` | Value shape could not be resolved from the AST. |
+
+## Example output
+
+```text
+🔍 Bazable Contract Review
+
+POST https://api.example.com/v1/users
+  📁 Sources:
+    - src/pages/signup.tsx:42:18
+    - src/pages/admin/invite.tsx:88:12
+  📥 Request schema:
+    - email: string [confidence: high] (source: "user@example.com")
+    - name: string [confidence: medium] ⚠️ needs confirmation
+    - age: number [confidence: high] (source: 30)
+  📤 Response schema:
+    - id: string
+    - createdAt: string
+```
+
+## When to use it
+
+<CardGroup cols={2}>
+  <Card title="Before pushing" icon="upload">
+    Audit inferred schemas before running [`bazable push`](/commands/push) so teammates don't inherit unverified guesses.
+  </Card>
+
+  <Card title="After extraction" icon="magnifying-glass">
+    Run right after [`bazable extract --payloads`](/commands/extract) to see which fields Bazable is unsure about.
+  </Card>
+
+  <Card title="Code review" icon="code-pull-request">
+    Include the review output in PRs when you add new endpoints so reviewers can verify assumptions.
+  </Card>
+
+  <Card title="Debugging drift" icon="bug">
+    Trace a failing [`bazable inspect`](/commands/inspect) or [`bazable test`](/commands/test) back to the exact call site that introduced the endpoint.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Provenance and `request_meta` are written by [`bazable extract`](/commands/extract). Re-run extraction after any code changes to keep the review accurate.
+</Tip>
+
+<Note>
+  The metadata is stored alongside the existing simple schema format in `bazable.config.json` (`endpoints[url].provenance` and `endpoints[url].request_meta`). Older tooling that only reads `request` and `response` continues to work unchanged.
+</Note>

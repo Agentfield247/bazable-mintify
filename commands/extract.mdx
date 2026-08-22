@@ -56,6 +56,29 @@ bazable extract --pattern 'requests\.get\("([^"]+)"' --ext .py
 
 </CodeGroup>
 
+## Provenance and inference metadata
+
+Every extraction records **provenance** (the file, line, and column of each call site) and **field-level metadata** (inferred vs confirmed, source value, and confidence) on the endpoint entry:
+
+```json bazable.config.json
+{
+  "endpoints": {
+    "POST https://api.example.com/v1/users": {
+      "request": { "email": "string", "age": "number" },
+      "request_meta": {
+        "email": { "inferred": true, "confidence": "high", "source_value": "user@example.com" },
+        "age":   { "inferred": true, "confidence": "high", "source_value": 30 }
+      },
+      "provenance": [
+        { "file": "src/pages/signup.tsx", "line": 42, "column": 18 }
+      ]
+    }
+  }
+}
+```
+
+Use [`bazable review`](/commands/review) to render this as a human-readable audit report with flags for fields that need confirmation.
+
 <Tip>
-  Run [`bazable inspect`](/commands/inspect) after extraction to validate that your code still matches the contract.
+  Run [`bazable inspect`](/commands/inspect) after extraction to validate that your code still matches the contract, and [`bazable review`](/commands/review) to audit which inferred fields are low confidence.
 </Tip>

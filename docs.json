@@ -42,7 +42,8 @@
           "commands/export",
           "commands/generate-db",
           "commands/types",
-          "commands/lsp"
+          "commands/lsp",
+          "commands/review"
         ]
       },
       {

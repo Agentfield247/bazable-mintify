@@ -18,4 +18,4 @@ It scans your codebase, builds an API contract automatically, and enforces it ac
 - MCP (AI Agent) Server: /commands/mcp
 - LSP (Editor Integration): /commands/lsp
 ## Available Commands (summary)
-init, add, extract, import, config, inspect, test, diff, types, client, generate backend, gen ui, gen db, curl, serve, ui, docs, export, hook, errors, login/logout, watch, push, sync, mcp, ci, explain, propose, accept, lsp
+init, add, extract, import, config, inspect, test, diff, types, client, generate backend, gen ui, gen db, curl, serve, ui, docs, export, hook, errors, login/logout, watch, push, sync, mcp, ci, explain, propose, accept, lsp, review

@@ -31,6 +31,8 @@ It reads your codebase (frontend, backend, or both), builds an API contract auto
 - Options: -r (--payloads) infer request schemas, -s (--preset), --pattern, --ext, --ignore, --wrapper
 - Auto‑detects any function name containing "fetch" or "api"
 - Handles template literals, follows variable assignments
+- Records provenance (file, line, column) for every call site into endpoints[url].provenance
+- With -r, records field-level metadata (inferred, confidence: high|medium|low, source_value, source_type) into endpoints[url].request_meta
 - Example: bazable extract -r -s py
 ### import (imp)
 - Description: Import OpenAPI/Swagger/Postman/CSV
@@ -150,6 +152,13 @@ It reads your codebase (frontend, backend, or both), builds an API contract auto
 - Description: Start Language Server Protocol engine for editors
 - Real‑time diagnostics and hover tooltips
 - Example: bazable lsp
+### review (rv)
+- Description: Show provenance (file/line/column) and per‑field inference confidence for every endpoint in the contract
+- Options: none
+- Reads endpoints[url].provenance and endpoints[url].request_meta populated by `bazable extract`
+- Confidence levels: high (literal), medium (identifier/object), low (unresolved)
+- Fields with low/medium confidence are flagged "needs confirmation"
+- Example: bazable review
 ## Environment / Configuration
 - Credentials stored in ~/.bazable/credentials.json
 - AI keys, base URL, model stored in bazable.config.json (aiApiKey, aiBaseUrl, aiModel)
